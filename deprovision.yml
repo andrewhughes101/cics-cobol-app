@@ -66,10 +66,10 @@
 
     - name: Delete the COBOL source
       ibm.ibm_zos_core.zos_data_set:
-        name: KIERAB.DEMO.COBOL.SOURCE
+        name: KIERAB.COBOL.SOURCE
         state: absent
 
     - name: Delete the load library
       ibm.ibm_zos_core.zos_data_set:
-        name: KIERAB.DEMO.COBOL.LOAD
+        name: KIERAB.COBOL.LOAD
         state: absent

@@ -7,8 +7,8 @@
   environment: "{{ environment_vars }}"
 
   vars:
-    load_data_set: KIERAB.DEMO.COBOL.LOAD
-    src_data_set: KIERAB.DEMO.COBOL.SOURCE
+    load_data_set: KIERAB.COBOL.LOAD
+    src_data_set: KIERAB.COBOL.SOURCE
     member_name: HELLO
 
   tasks:
