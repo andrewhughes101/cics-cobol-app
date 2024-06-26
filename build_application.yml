@@ -22,6 +22,7 @@
       ibm.ibm_zos_core.zos_data_set:
         name: "{{ load_data_set }}"
         type: pdse
+        record_format: u
         replace: true
 
     - name: Copy local COBOL source to data set
