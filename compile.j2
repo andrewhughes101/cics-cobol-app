@@ -1,0 +1,18 @@
+//PROGCC1 JOB REGION=0M,MSGCLASS=1,NOTIFY=&SYSUID
+//*
+//* Proc skeleton: Translate/compile/link
+//*
+//*
+//PROCLIB JCLLIB ORDER=CTS610.CICS740.SDFHPROC
+//COMPILE EXEC DFHZITCL,
+//       INDEX='CTS610.CICS740',
+//       PROGLIB='{{ load_data_set }}',
+//       DSCTLIB='CTS610.CICS740.SDFHCOB',
+//       LNKPARM='AMODE(31),RMODE(ANY)',
+//       LNGPRFX='PP.COBOL390.V630',
+//       OUTC=H, 
+//       REGION=0M
+//COBOL.SYSIN  DD DISP=SHR,DSN={{ src_data_set }}({{ member_name }})
+//LKED.SYSIN DD *
+  NAME  {{ member_name }}(R)
+/*

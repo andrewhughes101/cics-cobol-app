@@ -1,0 +1,47 @@
+# (c) Copyright IBM Corp. 2024
+# Apache License, Version 2.0 (see https://opensource.org/licenses/Apache-2.0)
+---
+- name: Compile COBOL application
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+
+  vars:
+    load_data_set: KIERAB.DEMO.COBOL.LOAD
+    src_data_set: KIERAB.DEMO.COBOL.SOURCE
+    member_name: HELLO
+
+  tasks:
+    - name: Create data set for cobol source
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ src_data_set }}"
+        type: pdse
+        replace: true
+
+    - name: Create data set for compiled cobol
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ load_data_set }}"
+        type: pdse
+        replace: true
+
+    - name: Copy local COBOL source to data set
+      ibm.ibm_zos_core.zos_copy:
+        src: "{{ playbook_dir }}/hello.cbl"
+        dest: "{{ src_data_set }}({{ member_name }})"
+        force: true
+        encoding:
+          from: ISO8859-1
+          to: IBM-1047
+
+    - name: Compile COBOL
+      ibm.ibm_zos_core.zos_job_submit:
+        src: "{{ playbook_dir }}/compile.j2"
+        location: LOCAL
+        use_template: true
+      register: compile_output
+
+
+
+
+
+
