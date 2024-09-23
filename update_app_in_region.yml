@@ -1,0 +1,12 @@
+# (c) Copyright IBM Corp. 2024
+# Apache License, Version 2.0 (see https://opensource.org/licenses/Apache-2.0)
+---
+- name: Update Application in region
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: New copy program
+      ibm.ibm_zos_core.zos_operator:
+        cmd: "F {{ applid }},CEMT SET PROGRAM(HELLO) NEWCOPY"

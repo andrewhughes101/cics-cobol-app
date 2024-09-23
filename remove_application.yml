@@ -1,0 +1,23 @@
+# (c) Copyright IBM Corp. 2024
+# Apache License, Version 2.0 (see https://opensource.org/licenses/Apache-2.0)
+---
+- name: Remove Application data sets
+  hosts: all
+  gather_facts: false
+  environment: "{{ environment_vars }}"
+
+  tasks:
+    - name: Delete the COBOL source
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ ansible_user }}.COBOL.SOURCE"
+        state: absent
+
+    - name: Delete the load library
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ ansible_user }}.COBOL.LOAD"
+        state: absent
+
+    - name: Delete the JCL data set
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ ansible_user }}.COBOL.JCL"
+        state: absent

@@ -62,18 +62,3 @@
     - name: Delete the CICS startup JCL data set (DFHSTART)
       ibm.ibm_zos_cics.region_jcl:
         applid: "{{ applid }}"
-
-    - name: Delete the COBOL source
-      ibm.ibm_zos_core.zos_data_set:
-        name: "{{ ansible_user }}.COBOL.SOURCE"
-        state: absent
-
-    - name: Delete the load library
-      ibm.ibm_zos_core.zos_data_set:
-        name: "{{ ansible_user }}.COBOL.LOAD"
-        state: absent
-
-    - name: Delete the JCL data set
-      ibm.ibm_zos_core.zos_data_set:
-        name: "{{ ansible_user }}.COBOL.JCL"
-        state: absent
