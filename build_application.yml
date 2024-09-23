@@ -10,6 +10,7 @@
     load_data_set: "HUGHEA.COBOL.LOAD"
     src_data_set: "HUGHEA.COBOL.SOURCE"
     member_name: HELLO
+    jcl_data_set: "HUGHEA.COBOL.JCL"
 
   tasks:
     - name: Create data set for cobol source
@@ -34,15 +35,17 @@
           from: ISO8859-1
           to: IBM-1047
 
-    - name: Compile COBOL
-      ibm.ibm_zos_core.zos_job_submit:
+    - name: Copy JCL to data set
+      ibm.ibm_zos_core.zos_copy:
         src: "{{ playbook_dir }}/compile.j2"
-        location: LOCAL
+        dest: "{{ jcl_data_set }}"
+        force: true
         use_template: true
+        encoding:
+          from: ISO8859-1
+          to: IBM-1047
+
+    - name: Submit JCL
+      ibm.ibm_zos_core.zos_job_submit:
+        src: "{{ jcl_data_set }}"
       register: compile_output
-
-
-
-
-
-

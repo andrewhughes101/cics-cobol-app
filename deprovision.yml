@@ -4,7 +4,6 @@
 - name: Stop CICS and deprovision CICS Data sets
   hosts: all
   gather_facts: false
-  vars_files: "{{ playbook_dir }}/host_vars/variables.yml"
   environment: "{{ environment_vars }}"
 
   module_defaults:
@@ -72,4 +71,9 @@
     - name: Delete the load library
       ibm.ibm_zos_core.zos_data_set:
         name: "{{ ansible_user }}.COBOL.LOAD"
+        state: absent
+
+    - name: Delete the JCL data set
+      ibm.ibm_zos_core.zos_data_set:
+        name: "{{ ansible_user }}.COBOL.JCL"
         state: absent

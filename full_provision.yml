@@ -4,7 +4,6 @@
 - name: Provision CICS Data sets and start the region
   hosts: all
   gather_facts: false
-  vars_files: "{{ playbook_dir }}/host_vars/variables.yml"
   environment: "{{ environment_vars }}"
 
   module_defaults:
@@ -46,7 +45,7 @@
         input_content: |
           ADD GROUP(DFHTERMC) LIST(DFHLIST1)
           DEFINE PROGRAM(HELLO) GROUP(APPGRP)
-          DEFINE TRANSACTION(KAPP) GROUP(APPGRP) PROGRAM(HELLO)
+          DEFINE TRANSACTION(DREW) GROUP(APPGRP) PROGRAM(HELLO)
           ADD GROUP(APPGRP) LIST(APPLIST)
 
     - name: Create the transient data intrapartition data set (DFHINTRA)
