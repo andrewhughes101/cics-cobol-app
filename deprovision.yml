@@ -66,10 +66,10 @@
 
     - name: Delete the COBOL source
       ibm.ibm_zos_core.zos_data_set:
-        name: KIERAB.COBOL.SOURCE
+        name: "{{ ansible_user }}.COBOL.SOURCE"
         state: absent
 
     - name: Delete the load library
       ibm.ibm_zos_core.zos_data_set:
-        name: KIERAB.COBOL.LOAD
+        name: "{{ ansible_user }}.COBOL.LOAD"
         state: absent

@@ -7,8 +7,8 @@
   environment: "{{ environment_vars }}"
 
   vars:
-    load_data_set: KIERAB.COBOL.LOAD
-    src_data_set: KIERAB.COBOL.SOURCE
+    load_data_set: "{{ ansible_user }}.COBOL.LOAD"
+    src_data_set: "{{ ansible_user }}.COBOL.SOURCE"
     member_name: HELLO
 
   tasks:

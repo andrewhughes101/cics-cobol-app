@@ -3,7 +3,7 @@
         ENVIRONMENT DIVISION.
         DATA DIVISION.
         WORKING-STORAGE SECTION.
-        01 MSG  PIC X(14) VALUE "Hello CICS T3!".
+        01 MSG  PIC X(10) VALUE "Hello CAF!".
         LINKAGE SECTION.
         PROCEDURE DIVISION.
             DISPLAY "Hello".
