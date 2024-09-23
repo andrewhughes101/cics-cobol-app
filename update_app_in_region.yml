@@ -6,7 +6,37 @@
   gather_facts: false
   environment: "{{ environment_vars }}"
 
+  vars:
+    load_data_set: "HUGHEA.COBOL.LOAD"
+    src_data_set: "HUGHEA.COBOL.SOURCE"
+    member_name: HELLO
+    jcl_data_set: "HUGHEA.COBOL.JCL"
+
   tasks:
+    - name: Copy local COBOL source to data set
+      ibm.ibm_zos_core.zos_copy:
+        src: "{{ playbook_dir }}/hello.cbl"
+        dest: "{{ src_data_set }}({{ member_name }})"
+        force: true
+        encoding:
+          from: ISO8859-1
+          to: IBM-1047
+
+    - name: Copy JCL to data set
+      ibm.ibm_zos_core.zos_copy:
+        src: "{{ playbook_dir }}/compile.j2"
+        dest: "{{ jcl_data_set }}"
+        force: true
+        use_template: true
+        encoding:
+          from: ISO8859-1
+          to: IBM-1047
+
+    - name: Submit JCL
+      ibm.ibm_zos_core.zos_job_submit:
+        src: "{{ jcl_data_set }}"
+      register: compile_output
+
     - name: New copy program
       ibm.ibm_zos_core.zos_operator:
         cmd: "F {{ applid }},CEMT SET PROGRAM(HELLO) NEWCOPY"
