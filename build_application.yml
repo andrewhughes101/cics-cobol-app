@@ -7,8 +7,8 @@
   environment: "{{ environment_vars }}"
 
   vars:
-    load_data_set: "{{ ansible_user }}.COBOL.LOAD"
-    src_data_set: "{{ ansible_user }}.COBOL.SOURCE"
+    load_data_set: "HUGHEA.COBOL.LOAD"
+    src_data_set: "HUGHEA.COBOL.SOURCE"
     member_name: HELLO
 
   tasks:
